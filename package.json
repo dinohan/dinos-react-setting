@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack serve --progress --mode development && open http://localhost:3000/",
+    "dev": "webpack serve --progress --mode development",
     "start": "webpack --mode development",
     "build": "webpack --progress --mode production"
   },
@@ -42,6 +42,7 @@
     "html-webpack-plugin": "^4.5.1",
     "prettier": "^2.2.1",
     "style-loader": "^2.0.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^5.13.0",
     "webpack-cli": "^4.3.1",
     "webpack-dev-server": "^3.11.1"

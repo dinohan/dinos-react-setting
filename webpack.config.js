@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const appIndex = path.resolve(__dirname, 'src', 'index.tsx');
 const appSrc = path.resolve(__dirname, 'src');
@@ -20,8 +21,8 @@ module.exports = (webpackEnv) => ({
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader',
+        test: /\.(tsx|ts)$/,
+        use: 'awesome-typescript-loader',
         include: appSrc,
       },
       {
@@ -51,10 +52,11 @@ module.exports = (webpackEnv) => ({
 
   devServer: {
     contentBase: appPublic,
-    port: 3000,
+    host: '0.0.0.0',
+    port: 3003,
     hot: true,
     inline: true,
-    hotOnly: true,
+    historyApiFallback: true,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -63,4 +65,11 @@ module.exports = (webpackEnv) => ({
     }),
     new CleanWebpackPlugin(),
   ],
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+      }),
+    ],
+  },
 });
